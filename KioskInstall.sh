@@ -32,7 +32,7 @@ echo -e "\nChecking for unclutter: '$_PKG_OK'"
 if [ "" == "$_PKG_OK" ]; then
 	echo "No unclutter tool found.  Installing and Setting up unclutter now."
 	sleep 3
-	sudo apt-get --force-yes --yes install unclutter
+	sudo apt-get -y install unclutter
 fi
 
 _PKG_OKTwo=$(dpkg-query -W --showformat='${Status}\n' vim|grep "install ok installed")
@@ -40,7 +40,7 @@ echo -e "\nChecking for vim: '$_PKG_OKTwo'"
 if [ "" == "$_PKG_OKTwo" ]; then
 	echo "No vim editor found.  Installing and Setting up vim now."
 	sleep 3
-	sudo apt-get --force-yes --yes install vim
+	sudo apt-get -y install vim
 fi
 
 

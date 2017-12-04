@@ -61,7 +61,7 @@ while true; do
 		then
 			echo "Now writing orientation to config file."
 			sleep 2
-			echo -e "# Display orientation.  Landscape = 0, Portrait = 1\ndisplay_rotate=0" | sudo tee -a /boot/config.txt
+			echo -e "# Display orientation.  Landscape = 0, Portrait = 1\ndisplay_rotate=1" | sudo tee -a /boot/config.txt
 			echo -e "\n# Use 24 bit colors\nframebuffer_depth=24" | sudo tee -a /boot/config.txt
 			break
 		fi
@@ -83,9 +83,14 @@ while true; do
 	read _URL
 	echo "You entered the URL as '$_URL'.  Is that correct? y/n"
 	read _yn
-	case $_yn in
-		[Yy]*) while true; do
+	if [ "$_yn" == "y" ];
+		then
 			echo "Now writing chromium and kiosk configurations to config file.  There will be a backup of original config file created.  It will be located ~/.config/lxsession/LXDE-pi/autostart.backup."
 			sleep 5
+			cp ~/.config/lxsession/LXDE-pi/autostart ~/.config/lxsession/LXDE-pi/autostart.backup
 			echo -e "@xset s off\n@xset -dpms\n@xset s noblank" | sudo tee -a ~/.config/lxsession/LXDE-pi/autostart
-
+			echo -e "@chromium-browser --disable-infobars --disable-session-crashed-bubble --kiosk $_URL" | sudo tee -a ~/.config/lxsession/LXDE-pi/autostart
+			echo "All done!! Please restart your Raspberry Pi now. Chromium will start in kiosk mode displaying the page you specified with the URL you specfied. Thank you -JHart"
+			break
+		fi
+	done

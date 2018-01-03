@@ -95,7 +95,7 @@ while true; do
 			sleep 5
 			cp ~/.config/lxsession/LXDE-pi/autostart ~/.config/lxsession/LXDE-pi/autostart.backup
 			echo -e "@xset s off\n@xset -dpms\n@xset s noblank" | sudo tee -a ~/.config/lxsession/LXDE-pi/autostart
-			echo -e "@chromium-browser --disable-infobars --disable-session-crashed-bubble --kiosk $_URL" | sudo tee -a ~/.config/lxsession/LXDE-pi/autostart
+			echo -e "@chromium-browser --noerrdialogs --disable-infobars --disable-session-crashed-bubble --kiosk $_URL" | sudo tee -a ~/.config/lxsession/LXDE-pi/autostart
 			echo "All done!! Please restart your Raspberry Pi now. Chromium will start in kiosk mode displaying the page you specified with the URL you specfied. Thank you -JHart"
 			break
 		fi

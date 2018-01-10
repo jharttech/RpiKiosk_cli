@@ -98,6 +98,7 @@ while true; do
 			echo -e "@chromium-browser --noerrdialogs --disable-infobars --disable-session-crashed-bubble --kiosk $_URL" | sudo tee -a ~/.config/lxsession/LXDE-pi/autostart
 			break
 		fi
+	done
 ##########################################################
 
 # Here we edit the chromium defualt preferences file so that there will be no chrash flag upon reboot
@@ -108,4 +109,4 @@ sed -i 's/"exit_type":"Crashed"/"exit_type":"Normal"/' /home/pi/.config/chromium
 
 echo "All done!! Please restart your Raspberry Pi now. Chromium will start in kiosk mode displaying the page you specified with the URL you specfied. Thank you -JHart"
 sleep 5
-done
+exit

@@ -94,7 +94,7 @@ while true; do
 			echo "Now writing chromium and kiosk configurations to config file.  There will be a backup of original config file created.  It will be located ~/.config/lxsession/LXDE-pi/autostart.backup."
 			sleep 5
 			cp ~/.config/lxsession/LXDE-pi/autostart ~/.config/lxsession/LXDE-pi/autostart.backup
-			echo -e "@xset s off\n@xset -dpms\n@xset s noblank\n@noclutter -idle 0" | sudo tee -a ~/.config/lxsession/LXDE-pi/autostart
+			echo -e "@xset s off\n@xset -dpms\n@xset s noblank" | sudo tee -a ~/.config/lxsession/LXDE-pi/autostart
 			echo -e "@chromium-browser --noerrdialogs --disable-infobars --disable-session-crashed-bubble --kiosk $_URL" | sudo tee -a ~/.config/lxsession/LXDE-pi/autostart
 			break
 		fi

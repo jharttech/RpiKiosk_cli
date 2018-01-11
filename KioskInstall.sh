@@ -107,6 +107,32 @@ sed -i 's/"exited_cleanly":false/"exited_cleanly":true/' /home/pi/.config/chromi
 sed -i 's/"exit_type":"Crashed"/"exit_type":"Normal"/' /home/pi/.config/chromium/Default/Preferences
 ##########################################################
 
+# Here we edit the /etc/lightdm/lightdm.conf file to completely remove the mouse cursor from the system.
+echo -e "\n"
+echo "##################################################"
+echo "##################################################"
+echo -e "\n"
+while true; do
+	echo "The mouse cursor has been hidden until moved in your kiosk.  Would you like to remove the mouse cursor permenantly (Even when moved)? Answer 'Yes' or 'No'"
+	read _rmCursor
+	if [ "$_rmCursor" == "Yes" ];
+		then
+			echo "Now going to back up the lightdm.conf file and edit the new lightdm.conf to remove mouse cursor."
+			sleep 5
+			sudo cp /etc/lightdm/lightdm.conf /etc/lightdm/lightdm.conf.backup
+			sudo sed -i 's/#xserver-command=X/xserver-command=X -nocursor/' /etc/lightdm/lightdm.conf
+			break
+		else
+			if [ "$_rmCursor" == "No" ];
+				then
+					break
+			fi
+		fi
+	done
+
+
+
+##########################################################
 echo "All done!! Please restart your Raspberry Pi now. Chromium will start in kiosk mode displaying the page you specified with the URL you specfied. Thank you -JHart"
 sleep 5
 exit

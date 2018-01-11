@@ -66,6 +66,7 @@ while true; do
 		if [ "$_Undo" == "No" ];
 		then
 			echo "No changes will be made."
+		break
 		fi
 	fi
 done

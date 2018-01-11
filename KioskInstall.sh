@@ -59,6 +59,7 @@ while true; do
 	then
 		echo "Now writing orientation to config file."
 		sleep 2
+		sudo cp /boot/config.txt /boot/config.txt.backup
 		echo -e "# Display orientation.  Landscape = 0, Portrait = 1\ndisplay_rotate=0" | sudo tee -a /boot/config.txt
 		echo -e "\n# Use 24 bit colors\nframebuffer_depth=24" | sudo tee -a /boot/config.txt
 		break

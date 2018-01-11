@@ -53,14 +53,14 @@ while true; do
 		echo -e "\nChecking to see if mouse cursor has been disabled : '$_Kiosk_Ran'"
 		if [ "" == "$_Kiosk_Ran" ];
 		then
-			»·······echo "No configuration changes need to be made."
-			»·······sleep 3
+			echo "No configuration changes need to be made."
+			sleep 3
 		else
-			»·······echo "Reverting the /etc/lightdm/lightdm.conf file back to original state. This will allow your mouse cursor to return after rebooting your pi."
-			»······sleep 5
-				·sudo rm -rf /etc/lightdm/lightdm.conf
-			»·······sudo mv /etc/lightdm/lightdm.conf.backup /etc/lightdm/lightdm.conf
-		fi
+			echo "Reverting the /etc/lightdm/lightdm.conf file back to original state.  This will allow your mouse cursor to return after rebooting your pi."
+			sleep 5
+			sudo rm -rf /etc/lightdm/lightdm.conf
+			sudo mv /etc/lightdm/lightdm.conf.backup /etc/lightdm/lightdm.conf
+			fi
 	else
 		if [ "$_Undo" == "No" ];
 		then

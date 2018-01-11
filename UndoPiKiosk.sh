@@ -38,7 +38,6 @@ while true; do
 			echo "Changing /boot/config.txt back to original state."
 			sudo rm -rf /boot/config.txt
 			sudo mv /boot/config.txt.backup /boot/config.txt
-			break
 		fi
 		_Autostart_Check=$(ls /home/pi/.config/lxsession/LXDE-pi/ | grep "autostart.backup")
 		echo -e "\nLooking to see if autostart has been changed.  If so reverting it back to original : '$_Autostart_Check'"
@@ -49,7 +48,6 @@ while true; do
 			echo "Changing autostart config back to original state."
 			sudo rm -rf /home/pi/.config/lxsession/LXDE-pi/autostart
 			sudo mv /home/pi/.config/lxsession/LXDE-pi/autostart.backup /home/pi/.config/lxsession/LXDE-pi/autostart
-			break
 		fi
 		_Kiosk_Ran=$(ls /etc/lightdm/ | grep "lightdm.conf.backup")
 		echo -e "\nChecking to see if mouse cursor has been disabled : '$_Kiosk_Ran'"
@@ -62,7 +60,6 @@ while true; do
 			»······sleep 5
 				·sudo rm -rf /etc/lightdm/lightdm.conf
 			»·······sudo mv /etc/lightdm/lightdm.conf.backup /etc/lightdm/lightdm.conf
-			break
 		fi
 	else
 		if [ "$_Undo" == "No" ];

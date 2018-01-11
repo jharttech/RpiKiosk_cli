@@ -101,7 +101,7 @@ while true; do
 	done
 ##########################################################
 
-# Here we edit the chromium defualt preferences file so that there will be no chrash flag upon reboot
+# Here we edit the chromium defualt preferences file so that there will be no crash flag upon reboot
 
 sed -i 's/"exited_cleanly":false/"exited_cleanly":true/' /home/pi/.config/chromium/Default/Preferences
 sed -i 's/"exit_type":"Crashed"/"exit_type":"Normal"/' /home/pi/.config/chromium/Default/Preferences

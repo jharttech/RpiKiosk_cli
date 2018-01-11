@@ -41,7 +41,7 @@ while true; do
 			break
 		fi
 		_Autostart_Check=$(ls /home/pi/.config/lxsession/LXDE-pi/ | grep "autostart.backup")
-		echo -e "\nLooking to see if autostart has been changed.  If so reverting it back to original : $_Autostart_Check'"
+		echo -e "\nLooking to see if autostart has been changed.  If so reverting it back to original : '$_Autostart_Check'"
 		if [ "" == "$_Autostart_Check" ];
 		then
 			echo "Nothing to be changed in autostart config."
@@ -56,12 +56,13 @@ while true; do
 		if [ "" == "$_Kiosk_Ran" ];
 		then
 			»·······echo "No configuration changes need to be made."
-			»·······sleep 5
+			»·······sleep 3
 		else
 			»·······echo "Reverting the /etc/lightdm/lightdm.conf file back to original state. This will allow your mouse cursor to return after rebooting your pi."
 			»······sleep 5
 				·sudo rm -rf /etc/lightdm/lightdm.conf
 			»·······sudo mv /etc/lightdm/lightdm.conf.backup /etc/lightdm/lightdm.conf
+			break
 		fi
 	else
 		if [ "$_Undo" == "No" ];

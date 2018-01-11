@@ -30,7 +30,7 @@ then
 	sudo sed -i 's/#xserver-command=X/xserver-command=X -nocursor/' /etc/lightdm/lightdm.conf
 	echo "Mouse cursor has been disabled.  Please reboot your pi for changes to take effect."
 else
-	echo "Nothing to be done.  Your mouse cursor has already been enabled."
+	echo "Nothing to be done.  Your mouse cursor has already been disabled."
 	sleep 3
 fi
 

@@ -61,6 +61,7 @@ while true; do
 			sudo rm -rf /etc/lightdm/lightdm.conf
 			sudo mv /etc/lightdm/lightdm.conf.backup /etc/lightdm/lightdm.conf
 			fi
+			break
 	else
 		if [ "$_Undo" == "No" ];
 		then

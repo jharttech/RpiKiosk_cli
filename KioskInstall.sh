@@ -53,25 +53,39 @@ echo "###################################################"
 echo "###################################################"
 echo -e "\n"
 while true; do
-	echo "Please specify what screen orientation you will be using. (Answer with 'landscape' or 'portrait')"
-	read _Rotate
-	if [ "$_Rotate" == "landscape" ];
+	_Prev_Ran=$(ls /boot/ | grep "config.txt.backup")
+	if [ "" == "$_Prev_Ran" ];
 	then
-		echo "Now writing orientation to config file."
-		sleep 2
-		sudo cp /boot/config.txt /boot/config.txt.backup
-		echo -e "# Display orientation.  Landscape = 0, Portrait = 1\ndisplay_rotate=0" | sudo tee -a /boot/config.txt
-		echo -e "\n# Use 24 bit colors\nframebuffer_depth=24" | sudo tee -a /boot/config.txt
-		break
-	else
-		if [ "$_Rotate" == "portrait" ];
+		#echo "IF ONE MADE"
+		#sleep 3
+		echo "Please specify what screen orientation you will be using. (Answer with 'landscape' or 'portrait')"
+		read _Rotate
+		if [ "$_Rotate" == "landscape" ];
 		then
+			echo "IF TWO MADE"
+			sleep 3
 			echo "Now writing orientation to config file."
 			sleep 2
-			echo -e "# Display orientation.  Landscape = 0, Portrait = 1\ndisplay_rotate=1" | sudo tee -a /boot/config.txt
+			sudo cp /boot/config.txt /boot/config.txt.backup
+			echo -e "# Display orientation.  Landscape = 0, Portrait = 1\ndisplay_rotate=0" | sudo tee -a /boot/config.txt
 			echo -e "\n# Use 24 bit colors\nframebuffer_depth=24" | sudo tee -a /boot/config.txt
 			break
+		else
+			if [ "$_Rotate" == "portrait" ];
+			then
+				#echo "ELSE TWO MADE"
+				#sleep 3
+				echo "Now writing orientation to config file."
+				sleep 2
+				echo -e "# Display orientation.  Landscape = 0, Portrait = 1\ndisplay_rotate=1" | sudo tee -a /boot/config.txt
+				echo -e "\n# Use 24 bit colors\nframebuffer_depth=24" | sudo tee -a /boot/config.txt
+			fi
 		fi
+	break
+	else
+		#echo "ELSE ONE MADE"
+		#sleep 3
+		sudo mv /boot/config.txt.backup /boot/config.txt
 	fi
 done
 
@@ -104,8 +118,8 @@ while true; do
 
 # Here we edit the chromium defualt preferences file so that there will be no crash flag upon reboot
 
-sed -i 's/"exited_cleanly":false/"exited_cleanly":true/' /home/pi/.config/chromium/Default/Preferences
-sed -i 's/"exit_type":"Crashed"/"exit_type":"Normal"/' /home/pi/.config/chromium/Default/Preferences
+sudo sed -i 's/"exited_cleanly":false/"exited_cleanly":true/' /home/pi/.config/chromium/Default/Preferences
+sudo sed -i 's/"exit_type":"Crashed"/"exit_type":"Normal"/' /home/pi/.config/chromium/Default/Preferences
 ##########################################################
 
 # Here we edit the /etc/lightdm/lightdm.conf file to completely remove the mouse cursor from the system.

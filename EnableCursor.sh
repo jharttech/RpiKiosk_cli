@@ -21,7 +21,7 @@ _Kiosk_Ran=$(ls /etc/lightdm/ | grep "lightdm.conf.backup")
 echo -e "\nChecking to see if KioskInstall script has been previously ran : '$_Kiosk_Ran'"
 if [ "" == "$_Kiosk_Ran" ];
 then
-	echo "KioskInstall script has not been ran.  No configuration changes need to be made."
+	echo "Mouse was never disabled during Kiosk install.  No configuration changes need to be made."
 	sleep 5
 else
 	echo "Reverting the /etc/lightdm/lightdm.conf file back to original state. This will allow your mouse cursor to return after rebooting your pi."

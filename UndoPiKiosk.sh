@@ -46,8 +46,8 @@ while true; do
 			echo "Nothing to be changed in autostart config."
 		else
 			echo "Changing autostart config back to original state."
-			sudo rm -rf /home/pi/.config/lxsession/LXDE-pi/autostart
-			sudo mv /home/pi/.config/lxsession/LXDE-pi/autostart.backup /home/pi/.config/lxsession/LXDE-pi/autostart
+			rm -rf /home/pi/.config/lxsession/LXDE-pi/autostart
+			mv /home/pi/.config/lxsession/LXDE-pi/autostart.backup /home/pi/.config/lxsession/LXDE-pi/autostart
 		fi
 		_Kiosk_Ran=$(ls /etc/lightdm/ | grep "lightdm.conf.backup")
 		echo -e "\nChecking to see if mouse cursor has been disabled : '$_Kiosk_Ran'"

@@ -62,8 +62,8 @@ while true; do
 		read _Rotate
 		if [ "$_Rotate" == "landscape" ];
 		then
-			echo "IF TWO MADE"
-			sleep 3
+			#echo "IF TWO MADE"
+			#sleep 3
 			echo "Now writing orientation to config file."
 			sleep 2
 			sudo cp /boot/config.txt /boot/config.txt.backup
@@ -100,18 +100,24 @@ echo "##################################################"
 echo "##################################################"
 echo -e "\n"
 while true; do
-	echo "Please enter the URL of the kiosk, video, or slideshow that you wish to show."
-	read _URL
-	echo "You entered the URL as '$_URL'.  Is that correct? y/n"
-	read _yn
-	if [ "$_yn" == "y" ];
-		then
-			echo "Now writing chromium and kiosk configurations to config file.  There will be a backup of original config file created.  It will be located ~/.config/lxsession/LXDE-pi/autostart.backup."
-			sleep 5
-			cp ~/.config/lxsession/LXDE-pi/autostart ~/.config/lxsession/LXDE-pi/autostart.backup
-			echo -e "@xset s off\n@xset -dpms\n@xset s noblank" | sudo tee -a ~/.config/lxsession/LXDE-pi/autostart
-			echo -e "@chromium-browser --noerrdialogs --disable-infobars --disable-session-crashed-bubble --kiosk $_URL" | sudo tee -a ~/.config/lxsession/LXDE-pi/autostart
-			break
+	_Prev_RanTwo=$(ls ~/.config/lxsession/LXDE-pi/ | grep "autostart.backup")
+	if [ "" == "$_Prev_RanTwo" ]
+	then
+		echo "Please enter the URL of the kiosk, video, or slideshow that you wish to show."
+		read _URL
+		echo "You entered the URL as '$_URL'.  Is that correct? y/n"
+		read _yn
+		if [ "$_yn" == "y" ];
+			then
+				echo "Now writing chromium and kiosk configurations to config file.  There will be a backup of original config file created.  It will be located ~/.config/lxsession/LXDE-pi/autostart.backup."
+				sleep 5
+				cp ~/.config/lxsession/LXDE-pi/autostart ~/.config/lxsession/LXDE-pi/autostart.backup
+				echo -e "@xset s off\n@xset -dpms\n@xset s noblank" | sudo tee -a ~/.config/lxsession/LXDE-pi/autostart
+				echo -e "@chromium-browser --noerrdialogs --disable-infobars --disable-session-crashed-bubble --kiosk $_URL" | sudo tee -a ~/.config/lxsession/LXDE-pi/autostart
+				break
+			fi
+		else
+			sudo mv ~/.config/lxsession/LXDE-pi/autostart.backup ~/.config/lxsession/LXDE-pi/autostart
 		fi
 	done
 ##########################################################

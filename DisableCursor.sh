@@ -20,13 +20,13 @@ echo "###################################################"
 
 ##################################################
 
-_Cursor_Enabled=$(ls /etc/lightdm/ | grep "lightdm.conf.backup")
+_Cursor_Enabled=$(ls /etc/lightdm/ | grep "lightdm.conf.DSbackup")
 echo -e "\nChecking to see if mouse cursor is already disabled."
 if [ "" == "$_Cursor_Enabled" ];
 then
 	echo "Now backing up the lightdm.conf file and then editing the file to disable the mouse cursor."
 	sleep 5
-	sudo cp /etc/lightdm/lightdm.conf /etc/lightdm/lightdm.conf.backup
+	sudo cp /etc/lightdm/lightdm.conf /etc/lightdm/lightdm.conf.DSbackup
 	sudo sed -i 's/#xserver-command=X/xserver-command=X -nocursor/' /etc/lightdm/lightdm.conf
 	echo "Mouse cursor has been disabled.  Please reboot your pi for changes to take effect."
 else

@@ -53,7 +53,7 @@ echo "###################################################"
 echo "###################################################"
 echo -e "\n"
 while true; do
-	_Prev_Ran=$(ls /boot/ | grep "config.txt.backup")
+	_Prev_Ran=$(ls /boot/ | grep "config.txt.DSbackup")
 	if [ "" == "$_Prev_Ran" ];
 	then
 		#echo "IF ONE MADE"
@@ -66,7 +66,7 @@ while true; do
 			#sleep 3
 			echo "Now writing orientation to config file."
 			sleep 2
-			sudo cp /boot/config.txt /boot/config.txt.backup
+			sudo cp /boot/config.txt /boot/config.txt.DSbackup
 			echo -e "# Display orientation.  Landscape = 0, Portrait = 1\ndisplay_rotate=0" | sudo tee -a /boot/config.txt
 			echo -e "\n# Use 24 bit colors\nframebuffer_depth=24" | sudo tee -a /boot/config.txt
 			break
@@ -85,7 +85,7 @@ while true; do
 	else
 		#echo "ELSE ONE MADE"
 		#sleep 3
-		sudo mv /boot/config.txt.backup /boot/config.txt
+		sudo mv /boot/config.txt.DSbackup /boot/config.txt
 	fi
 done
 
@@ -100,7 +100,7 @@ echo "##################################################"
 echo "##################################################"
 echo -e "\n"
 while true; do
-	_Prev_RanTwo=$(ls ~/.config/lxsession/LXDE-pi/ | grep "autostart.backup")
+	_Prev_RanTwo=$(ls ~/.config/lxsession/LXDE-pi/ | grep "autostart.DSbackup")
 	if [ "" == "$_Prev_RanTwo" ]
 	then
 		echo "Please enter the URL of the kiosk, video, or slideshow that you wish to show."
@@ -111,7 +111,7 @@ while true; do
 			then
 				echo "Now writing chromium and kiosk configurations to config file.  There will be a backup of original config file created.  It will be located ~/.config/lxsession/LXDE-pi/autostart.backup."
 				sleep 5
-				cp ~/.config/lxsession/LXDE-pi/autostart ~/.config/lxsession/LXDE-pi/autostart.backup
+				cp ~/.config/lxsession/LXDE-pi/autostart ~/.config/lxsession/LXDE-pi/autostart.DSbackup
 				echo -e "@xset s off\n@xset -dpms\n@xset s noblank" | sudo tee -a ~/.config/lxsession/LXDE-pi/autostart
 				echo -e "@chromium-browser --noerrdialogs --disable-infobars --disable-session-crashed-bubble --kiosk $_URL" | sudo tee -a ~/.config/lxsession/LXDE-pi/autostart
 				break
@@ -140,7 +140,7 @@ while true; do
 		then
 			echo "Now going to back up the lightdm.conf file and edit the new lightdm.conf to remove mouse cursor."
 			sleep 5
-			sudo cp /etc/lightdm/lightdm.conf /etc/lightdm/lightdm.conf.backup
+			sudo cp /etc/lightdm/lightdm.conf /etc/lightdm/lightdm.conf.DSbackup
 			sudo sed -i 's/#xserver-command=X/xserver-command=X -nocursor/' /etc/lightdm/lightdm.conf
 			break
 		else

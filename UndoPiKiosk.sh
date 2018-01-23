@@ -27,7 +27,7 @@ echo "##################################################"
 while true; do
 	echo "This script will remove the configuration changes made by running the KioskInstall script.  This will return your pi back to its natural state after a reboot.  Are you sure you want to continue? (If so answer with 'Yes please.' If not please answer with 'No')"
 	read _Undo
-	if [ "$_Undo" == "Yes please." ];
+	if [ "$_Undo" == "Yes please!" ];
 	then
 		_Boot_Config=$(ls /boot/ | grep "config.txt.DSbackup")
 		echo "Now going to revert changes made to the pi during KioskInstall : '$_Boot_Config'"

@@ -79,9 +79,9 @@ while true; do
 				sleep 2
 				echo -e "# Display orientation.  Landscape = 0, Portrait = 1\ndisplay_rotate=1" | sudo tee -a /boot/config.txt
 				echo -e "\n# Use 24 bit colors\nframebuffer_depth=24" | sudo tee -a /boot/config.txt
+				break
 			fi
 		fi
-	break
 	else
 		#echo "ELSE ONE MADE"
 		#sleep 3
@@ -151,6 +151,49 @@ while true; do
 		fi
 	done
 
+#########################################################
+
+# Here we ask the user if they would like to change the RPi Memory split
+
+echo -e "\n"
+echo "##################################################"
+echo "##################################################"
+echo -e "\n"
+while true; do
+	echo "Finally, would you like to change your Pi's Memory Split? Type YES or NO. (If you do not know what this means type NO)"
+	read _Mem_Split
+	if [ "$_Mem_Split" == "YES" ];
+	then
+		echo "Please enter the Memory Split you would like. (Must be one of the following values '64, 128, 256, 512' NOTE 64 is the default)"
+		read _Mem_Val
+		if [ "$_Mem_Val" == "64" ] || [ "$_Mem_Val" == "128" ] || [ "$_Mem_Val" == "256" ] || [ "$_Mem_Val" == "512" ];
+		then
+			echo " You have entered your desired memory split to be '$_Mem_Val', is that correct? y/n"
+			read _Mem_Yn
+			if [ "$_Mem_Yn" == "y" ];
+			then
+				_Mem_Set=$(cat /boot/config.txt | grep "gpu_mem=")
+				if [ "" == "$_Mem_Set" ];
+				then
+					echo -e "\ngpu_mem=$_Mem_Val" | sudo tee -a /boot/config.txt
+					echo "Your new memory split has been added to /boot/config file!"
+					sleep 3
+					break
+				else
+					sudo sed -i "s/gpu_mem=[0-9]\+/gpu_mem=$_Mem_Val/" /boot/config.txt
+					echo "Your new memory split has been added to /boot/config file!"
+					break
+				fi
+			fi
+		fi
+	else if [ "$_Mem_Split" == "NO" ];
+	then
+		echo "Your Pi's memory split will remain set to default."
+		sleep 3
+		break
+	fi
+fi
+done
 
 
 ##########################################################

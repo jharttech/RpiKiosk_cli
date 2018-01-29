@@ -159,11 +159,11 @@ echo -e "\n"
 echo "##################################################"
 echo "##################################################"
 echo -e "\n"
-while true; do
-	echo "Finally, would you like to change your Pi's Memory Split? Type YES or NO. (If you do not know what this means type NO)"
-	read _Mem_Split
-	if [ "$_Mem_Split" == "YES" ];
-	then
+echo "Finally, would you like to change your Pi's Memory Split? Type YES or NO. (If you do not know what this means type NO)"
+read _Mem_Split
+if [ "$_Mem_Split" == "YES" ];
+then
+	while true; do
 		echo "Please enter the Memory Split you would like. (Must be one of the following values '64, 128, 256, 512' NOTE 64 is the default)"
 		read _Mem_Val
 		if [ "$_Mem_Val" == "64" ] || [ "$_Mem_Val" == "128" ] || [ "$_Mem_Val" == "256" ] || [ "$_Mem_Val" == "512" ];
@@ -186,6 +186,7 @@ while true; do
 				fi
 			fi
 		fi
+	done
 	else if [ "$_Mem_Split" == "NO" ];
 	then
 		echo "Your Pi's memory split will remain set to default."
@@ -193,7 +194,6 @@ while true; do
 		break
 	fi
 fi
-done
 
 
 ##########################################################

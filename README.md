@@ -34,7 +34,7 @@ STEPS
 
 OR
 
-	Download the RpiKiosk_cli from https://github.com/jharttech/RpiKiosk_cli/archive/master.zip to your pi.
+1.	Download the RpiKiosk_cli from https://github.com/jharttech/RpiKiosk_cli/archive/master.zip to your pi.
 
 	extract the files:
 

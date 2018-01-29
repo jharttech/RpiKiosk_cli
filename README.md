@@ -6,4 +6,4 @@ This is still in development, if you wish to use this as of 20180126 you will ne
 
 This was specifically written for use on an armhf architeture Raspberry Pi 2 or 3 running Raspbian-stretch OS.
 
-You will need dialog package installed.  You can install it using your package manager.
+You will need dialog package installed.  You can install it using sudo apt-get install dialog.

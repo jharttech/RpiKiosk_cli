@@ -42,7 +42,7 @@ OR
 
 		$ unzip RpiKiosk_cli-master.zip
 
-		$ mv -r RpiKiosk_cli-master /pi/home/RpiKiosk_cli
+		$ mv -r RpiKiosk_cli-master /home/pi/RpiKiosk_cli
 
 2.	Go into the RpiKiosk_cli folder.
 

@@ -1,105 +1,73 @@
-# RpiKiosk
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+		<title>RpiKiosk_cli Version</title>
+		<link rel="stylesheet" media="screen and (min-width: 600px)" href="./css/style.css" />
+		<link rel="stylesheet" media="screen and (max-width: 599px)" href="./css/mstyle.css" />
+	</head>
+	<?php if(($_POST['blog'])){
+	header("Location: blogList.php");}?>
+	<body>
+		<table id="title">
+			<tr>
+				<td id="title">
+					<h1>Creating Easy Digital Sign With Raspberry Pi 3 CLI Version</h1>
+				</td>
+			</tr>
+		</table>
+		<table id="blog">
+			<tr>
+				<td id="blog">
+					<p id="blog"><h2><strong>How To</strong></h2></p>
+					<p id="blog"><b>***NOTE*** This tutorial is for the CLI Version of RpiKiosk.</br>These scripts and this tutorial were designed for use with a raspberry pi 2 or 3 with armhf architecture.</br>These scripts are based on the 2017-11-29-raspbian-stretch version of raspbian.</b></br></p>
+					<p id="blog">1. The first thing you will need to do is install Raspian onto your raspberry pi.  To Install Raspian Stretch to your pi please go to <a href="https://www.raspberrypi.org/downloads/raspbian/">https://www.raspberrypi.org/downloads/raspbian/</a> and follow the instructions there.</br></p>
+					<p id="blog">There are a few packages that these scripts do not directly depend on but will help the user should they want to make further changes.  The RpiKioskInstall script will look for these and install them if they are not found on your pi.  However, if you wish to install them before running the script then run the following commands on your pi in the terminal:</br></p>
+					<code><pre>$ sudo apt-get update
+$ sudo apt-get install git vim clutter</pre></code>
+					<p id="blog">The "git" package is for users that are familiar with using git and want to clone the RpiKiosk Repository rather than downloading the zip file.</br>The "vim" package is simply a terminal text editor.  This package is not crucial but will be of benefit if you are an advanced linux or pi user.</br>The "clutter" package will hide your pi's mouse cursor when it is not being used.  This is good for locations that your kiosk or digital sign will not be within reach of public.  In the case that your kiosk or digital sign is within reach of public, the RpiKioskCursorDisable script will allow you to completely disable your mouse cursor on your pi. (This can be reverted using the RpiKioskCursorEnable script)</br></p>
+					<p id="blog">2. Clone the RpiKiosk_cli from https://github.com/jharttech/RpiKiosk_cli.git with the following command:</br></p>
+					<code><pre>$ git clone https://github.com/jharttech/RpiKiosk_cli.git</code></pre>
+					<p id="blog"><h2><strong>OR</strong></h2></p>
+					<p id="blog"> Download the RpiKiosk_cli ZIP file from <a href="https://github.com/jharttech/RpiKiosk_cli/archive/master.zip">https://github.com/jharttech/RpiKiosk_cli/archive/master/zip</a> to your pi, then extract the files using the following commands:</br></p>
+					<code><pre>$ cd /path/to/downloaded/RpiKiosk_cli-master.zip
+$ unzip RpiKiosk_cli-master.zip
+$ mv RpiKiosk_cli-master /home/pi/RpiKiosk_cli</pre></code>
+					<p id="blog">3. Go into the RpiKiosk_cli folder:</br></p>
+					<code><pre>$ cd
+$ cd RpiKiosk_cli</pre></code>
+					<p id="blog">4. Run the Install script: </br></p>
+					<code><pre>$ chmod +x KioskInstall.sh
+$ ./KioskInstall.sh</pre></code>
+					<p id="blog">This will start the Installation script and will walk you through the setup of your kiosk or digital sign.  Simply follow the script and answer with the desired inputs.  Once the script has finished you should restart your pi for the changes to take effect.</br></p>
+					<p id="blog"><h2><strong>NOTES</strong></h2></p>
+					<p id="blog">I recommend you setting up a free Dakboard account at <a href="https://dakboard.com/site">Dakboard.com</a>.  This company will help you quickly set up a nice digital display for free. (The free version is limited on customizations).</br></p>
+					<p id="blog">Screen Orientation:</br>This setting is dependant upon which way your digital sign (monitor or TV) is mounted.  Your options are "Landscape" or "Portrait".</br></br>Enter your URL:</br>The KioskInstall script will ask you for a URL to your kiosk, video, or slideshow.  If you are using DAKBoard, you will find this url under your account settings.  It will be called your Private URL.  If you are using google slides this will be your public published URL.  This URL can be an URL to any type of legal media that you wish to display on your digital sign.</br></br>Mouse Cursor Disable:</br>The KioskInstall script will ask if you would like to disable your mouse cursor.  If you choose to do so, you can revert this at a later time by running the "EnableCursor.sh" script in the RpiKiosk_cli folder.  If you choose not to disable the mouse cursor during installation, you can disable it later by running the "DisableCursor" script found in the RpiKiosk_cli folder.  The commands to run these scripts are:</br></p>
+					<code><pre>$ cd /home/pi/RpiKiosk_cli
+$ chmod +x EnableCursor.sh
+$ ./EnableCursor</pre></code>
+					<p id="blog">OR</br></p>
+					<code><pre>$ cd /home/pi/RpiKiosk_cli
+$ chmod +x DisableCursor
+$ ./DisableCursor</pre></code>
+					<p id="blog">Memory Split:</br>The KioskInstall script will ask if you would like to change the memory split of your pi.  If you do not no what this means please indicate that you would not like to change this value by entering "NO" when prompted.  You can change this later by running: </br></p>
+					<code><pre>$ raspi-config</pre></code>
+					<p id="blog">How to get to the terminal once you have installed the kiosk:</br>You may want to run other scripts or exit out of your newely created Kiosk.  To do this on your pi, press the "windows" key on your keyboard.  Next arrow down to "Accessories", arrow to the right one time, then arrow down to terminal and press the "enter" key.  Once the terminal is up, type the following command to stop the Kiosk:</br></p>
+					<code><pre>$ killall chromium-browsers</pre></code>
+					<p id="blog">(This will stop the kiosk and allow you to run other scripts or use your pi how ever you desire.)</br></p>
+					<p id="blog"><h2><strong>UNINSTALL</strong></h2></p>
+					<p id="blog">To uninstall the kiosk simply return to the terminal and run the following commands:</br></p>
+					<code><pre>$ cd /home/pi/RpiKiosk_cli
+$ chmod +x UndoPiKiosk.sh
+$ ./UndoPiKiosk.sh</pre></code>
+					<p id="blog">This will convert all config files back to original states and will enable the mouse if it has been disabled.</br></p>
+					<p id="disclaim"><b>IN NO EVENT WILL WE BE LIABLE FOR ANY DIRECT, INDIRECT, CONSEQUENTIAL, INCIDENTAL, SPECIAL OR EXEMPLARY DAMAGES FOR ANY USE OF THIS SITE, OR USE OF ANY OTHER LINKED SITE, OR SOFTWARE, EVEN IF WE ARE ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.</b></br></br></p>
+					<form action="" method="post" name="blog">
+					<input type="submit" name="blog" value="Back" />
 
-Create a simple kiosk or digital sign using your raspberry pi 3.  These scripts will do the heavy lifting by writing the config files needed based upon your entries.
-
-This is still in development, if you wish to use this as of 20180126 you will need to clone or download the zip file onto your Raspberry Pi 3, you can then run any one of the scripts that you desire.
-
-This was specifically written for use on an armhf architeture Raspberry Pi 2 or 3 running Raspbian-stretch OS.
-
-INSTRUCTIONS
-
-These instructions are for the RpiKiosk_cli scripts.  These scripts were designed to help wth the heavy lifting of creating a kiosk or digital sign using a raspberry pi 2 or 3 with armhf architecture.
-
-To install Rapian Strech to your pi please go to https://www.raspberrypi.org/downloads/raspbian/ and follow the instructions there.
-
-DEPENDENCY
-
-These scripts do not directly depend on any packages. However, there are a few packages that will help the user should they want to make further changes. The KioskInstall script will look for these and install them if they are not found on your pi.  If you want to install them before running the script then run the following commands on your pi.
-
-$ sudo apt-get update
-
-$ sudo apt-get install git
-
-$ sudo apt-get install vim clutter
-
-The "git" package is if you are familiar with using git and want to clone the RpiKiosk_cli Repositry rather than downloading the zip file.
-
-The "vim" package is simply a text editor.  This package is not crucial but will be of benefit if you are an advance linux or pi user.
-
-The "clutter" package will hide your mouse cursor when it is not being used.  This is good for locations that your kiosk or digital sign will not be with in reach of public.  In the case that your kiosk or digital sign is, the KioskInstall script will allow you to completely disable your mouse cursor on your pi. (Can be Reverted using the EnableCursor script)
-
-STEPS
-
-1.	Clone the RpiKiosk_cli from https://github.com/jharttech/RpiKiosk_cli.git into your github repository location onto your pi.
-
-		$ git clone https://github.com/jharttech/RpiKiosk_cli.git
-
-OR
-
-1.	Download the RpiKiosk_cli from https://github.com/jharttech/RpiKiosk_cli/archive/master.zip to your pi.
-
-	extract the files:
-
-		$ cd Downloads
-
-		$ unzip RpiKiosk_cli-master.zip
-
-		$ mv RpiKiosk_cli-master /home/pi/RpiKiosk_cli
-
-2.	Go into the RpiKiosk_cli folder.
-
-		$ cd
-
-		$ cd RpiKiosk_cli
-
-3.	Run the Install script
-
-		$ ./KioskInstall.sh
-
-	This will start the Installation script and will walk you through the setup of your kiosk or digital sign.  Simply follow the script and answer with the desired inputs.  Once the script has finished you should restart your pi for the changes to take effect.
-
-NOTES
-
-I recommend you setting up a free Dakboard account at https://dakboard.com/site.  This company will help you quickly set up a nice digital display for free. (The free version is limited on customizations)
-
-Screen Orientation:
-	This setting is dependant upon which way your digital sign (monitor or TV) is mounted.  Your options are "Landscape" or Portrait".
-
-Enter your URL:
-	The KioskInstall script will ask you for a URL to your kiosk, video, or slideshow.  If you are using DAKBoard, you will find this url under your account settings.  If will be called your Private URL.  If you are using google slides this will be your public published URL.  This URL can be a URL to any type of legal media that you wish to display on your digital sign.
-
-Mouse Cursor Disable:
-	The KioskInstall script will ask if you would like to disable your mouse cursor.  If you choose to do so, you can revert this at a later date by choosing the "Enable Mouse" option in the RpiKioskMain script.  If you choose not to disable the mouse cursor during install, you can disable it later by selecting "Disable Mouse" option in the RpiKioskMain script.
-
-Memory Split:
-	The KioskInstall script will ask if you would like to change the memory split of your pi.  If you do not know what this means please indicate that you would not like to change this value by entering "NO" when prompted.  You can change this later by running the "$ raspi-config" command.
-
-How to get to the terminal once you have installed the kiosk:
-	You may want to run other scripts or exit out of your newely created Kiosk.  To do this on your pi, press the "windows" key on your keyboard.  Next arrow down to "Accessories", arrow to the right one time, then arrow down to terminal and press the "enter" key.  Once the terminal is up, type the following command to stop the Kiosk:
-
-		$ killall chromium-browsers
-
-	(This will stop the kiosk and allow you to run other scripts or use your pi how ever you desire.)
-
-UNINSTALL
-
-To uninstall the kiosk simply return to the terminal and run the UndoPiKiosk.sh.  This script will revert all config files back to the orignial states and will enable the mouse if it has been disabled.
-
-
-
-http://www.gnu.org/copyleft/gpl.html
-
-Information on this Site is Copyright (C) 2009-2018 JHart Technology.
-This information is free; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
-
-This work is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
-​
-On Debian systems, the complete text of the GNU General Public License can be found in /usr/share/common-licenses/GPL file.
-
-
-IN NO EVENT WILL WE BE LIABLE FOR ANY DIRECT, INDIRECT, CONSEQUENTIAL, INCIDENTAL, SPECIAL OR EXEMPLARY DAMAGES FOR ANY USE OF THIS SITE, OR USE OF ANY OTHER LINKED SITE, OR SOFTWARE, EVEN IF WE ARE ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
-
-Privacy Policy
-https://jharttech.weebly.com/uploads/9/5/0/7/95072548/jhartprivacypolicy.htm
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

@@ -101,7 +101,7 @@ echo "##################################################"
 echo -e "\n"
 while true; do
 	_Prev_RanTwo=$(ls ~/.config/lxsession/LXDE-pi/ | grep "autostart.DSbackup")
-	if [ "" == "$_Prev_RanTwo" ]
+	if [ "" == "$_Prev_RanTwo" ];
 	then
 		echo "Please enter the URL of the kiosk, video, or slideshow that you wish to show."
 		read _URL
@@ -117,7 +117,7 @@ while true; do
 				break
 			fi
 		else
-			sudo mv ~/.config/lxsession/LXDE-pi/autostart.backup ~/.config/lxsession/LXDE-pi/autostart
+			sudo mv ~/.config/lxsession/LXDE-pi/autostart.DSbackup ~/.config/lxsession/LXDE-pi/autostart
 		fi
 	done
 ##########################################################

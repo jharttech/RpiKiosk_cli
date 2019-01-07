@@ -100,7 +100,7 @@ echo "##################################################"
 echo "##################################################"
 echo -e "\n"
 while true; do
-	_Prev_RanTwo=$(ls ~/.config/lxsession/LXDE-pi/ | grep "autostart.DSbackup")
+	_Prev_RanTwo=$(ls /etc/xdg/lxsession/LXDE-pi/ | grep "autostart.DSbackup")
 	if [ "" == "$_Prev_RanTwo" ];
 	then
 		echo "Please enter the URL of the kiosk, video, or slideshow that you wish to show."
@@ -109,15 +109,15 @@ while true; do
 		read _yn
 		if [ "$_yn" == "y" ];
 			then
-				echo "Now writing chromium and kiosk configurations to config file.  There will be a backup of original config file created.  It will be located ~/.config/lxsession/LXDE-pi/autostart.backup."
+				echo "Now writing chromium and kiosk configurations to config file.  There will be a backup of original config file created.  It will be located /etc/xdg/lxsession/LXDE-pi/autostart.backup."
 				sleep 5
-				cp ~/.config/lxsession/LXDE-pi/autostart ~/.config/lxsession/LXDE-pi/autostart.DSbackup
-				echo -e "@xset s off\n@xset -dpms\n@xset s noblank" | sudo tee -a ~/.config/lxsession/LXDE-pi/autostart
-				echo -e "@chromium-browser --noerrdialogs --disable-infobars --disable-session-crashed-bubble --incognito --kiosk $_URL" | sudo tee -a ~/.config/lxsession/LXDE-pi/autostart
+				cp /etc/xdg/lxsession/LXDE-pi/autostart /etc/xdg/lxsession/LXDE-pi/autostart.DSbackup
+				echo -e "@lxpanel --profile LXDE-pi\n@pcmanfm --desktop --profile LXDE-pi\n@xscreensaver -no-splash\npoint-rpi\n@xset s off\n@xset -dpms\n@xset s noblank" | sudo tee -a /etc/xdg/lxsession/LXDE-pi/autostart
+				echo -e "@chromium-browser --noerrdialogs --disable-infobars --disable-session-crashed-bubble --incognito --kiosk $_URL" | sudo tee -a /etc/xdg/lxsession/LXDE-pi/autostart
 				break
 			fi
 		else
-			sudo mv ~/.config/lxsession/LXDE-pi/autostart.DSbackup ~/.config/lxsession/LXDE-pi/autostart
+			sudo mv /etc/xdg/lxsession/LXDE-pi/autostart.DSbackup /etc/xdg/lxsession/LXDE-pi/autostart
 		fi
 	done
 ##########################################################

@@ -39,15 +39,15 @@ while true; do
 			sudo rm -rf /boot/config.txt
 			sudo mv /boot/config.txt.DSbackup /boot/config.txt
 		fi
-		_Autostart_Check=$(ls /home/pi/.config/lxsession/LXDE-pi/ | grep "autostart.backup")
+		_Autostart_Check=$(ls /etc/xdg/lxsession/LXDE-pi/ | grep "autostart.backup")
 		echo -e "\nLooking to see if autostart has been changed.  If so reverting it back to original : '$_Autostart_Check'"
 		if [ "" == "$_Autostart_Check" ];
 		then
 			echo "Nothing to be changed in autostart config."
 		else
 			echo "Changing autostart config back to original state."
-			sudo rm -rf /home/pi/.config/lxsession/LXDE-pi/autostart
-			sudo mv /home/pi/.config/lxsession/LXDE-pi/autostart.DSbackup /home/pi/.config/lxsession/LXDE-pi/autostart
+			sudo rm -rf /etc/xdg/lxsession/LXDE-pi/autostart
+			sudo mv /etc/xdg/lxsession/LXDE-pi/autostart.DSbackup /etc/xdg/lxsession/LXDE-pi/autostart
 		fi
 		_Kiosk_Ran=$(ls /etc/lightdm/ | grep "lightdm.conf.backup")
 		echo -e "\nChecking to see if mouse cursor has been disabled : '$_Kiosk_Ran'"
